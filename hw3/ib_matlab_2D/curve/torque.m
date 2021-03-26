@@ -1,6 +1,6 @@
 function tau = torque(theta,X,Z)
 global Nb K dtheta L0;
-arc_length=[0:(Nb-1)]*dtheta;
+arc_length=([0:(Nb-1)]+1/2)*dtheta;
 ind_1=arc_length/(L0/4)<=pi;
 int_1=sum(ind_1);
 % fprintf(num2str(int_1/Nb));

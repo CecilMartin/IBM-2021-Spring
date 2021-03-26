@@ -10,10 +10,10 @@ global Lp L;
 initialize
 init_a
 
-video=VideoWriter(['mov/straight_line_theta=',num2str(theta0),'_Lp=',num2str(Lp),...
-    '_mass=',num2str(m0),'.avi']);
-video.FrameRate=10;
-open(video);
+% video=VideoWriter(['mov/straight_line_theta=',num2str(theta0),'_Lp=',num2str(Lp),...
+%     '_mass=',num2str(m0),'.avi']);
+% video.FrameRate=30;
+% open(video);
 
 
 
@@ -21,7 +21,7 @@ for clock=1:clockmax
     XX=X+(dt/2)*interp(u,X);
     theta00=theta0+(dt/2)*omega;
     ZZ=bd_line(theta00);
-    tau_half=K*dot(sum((XX-ZZ).*(repmat([0:Nb-1]',1,2)*dtheta-Lp)),...
+    tau_half=K*dot(sum((XX-ZZ).*(repmat([0:Nb-1]'+1/2,1,2)*dtheta-Lp)),...
         [-sin(theta00),cos(theta00)],2)*dtheta; %TO Check
     omega_half=omega+dt/2/I0*tau_half;
     
@@ -53,12 +53,12 @@ for clock=1:clockmax
             u(1:sv:end,1:sv:end,1),u(1:sv:end,1:sv:end,2))
         axis([0,L,0,L])
         %     caxis(valminmax)
-        axis equal
-        axis manual
-        title(sprintf('t=%.2f',dt*clock))
+%         axis equal
+%         axis manual
+        title(sprintf('t=%.1f, torque=%.2e',dt*clock,tau_half))
         drawnow
         hold off
-        writeVideo(video,getframe(gcf));
+%         writeVideo(video,getframe(gcf));
     end
 end
-close(video);
+% close(video);

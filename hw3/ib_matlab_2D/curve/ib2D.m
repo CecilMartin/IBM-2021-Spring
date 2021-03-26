@@ -54,7 +54,7 @@ for clock=1:clockmax
         %     caxis(valminmax)
         axis equal
         axis manual
-        title(sprintf('t=%.2f',dt*clock))
+        title(sprintf('t=%.1f, torque=%.2e',dt*clock,tau_half))
         drawnow
         hold off
         writeVideo(video,getframe(gcf));

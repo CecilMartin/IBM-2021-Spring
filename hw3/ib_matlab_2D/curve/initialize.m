@@ -1,7 +1,7 @@
 %initialize.m
 L=1.0
-L0=L/2 % projected length of the S shape
-theta0=pi/4
+L0=L/4 % projected length of the S shape
+theta0=pi*1/2
 
 N=64
 h=L/N
@@ -13,22 +13,26 @@ Nb = ceil(L0/2*pi/(dtheta))
 
 kp=[(2:Nb),1]
 km=[Nb,(1:(Nb-1))]
-K=100
+K=500
 rho=1
 mu=0.01
-tmax=10
-dt=0.01
+tmax=20
+dt=0.001/2
 clockmax=ceil(tmax/dt)
 
 m0=4
 I0=4*pi*m0*(L0/4)^3;
-f0=-0.1;
+f0=1;
 
 X=bd_line(theta0);
 
 Z=X;
 
 u=zeros(N,N,2);
+ff=zeros(N,N,2);
+ff(:,:,1)=f0;
+[u,uu]=fluid(u,ff);
+u_max=sqrt(max(u(:,:,1).^2+u(:,:,2).^2,[],'all'))
 omega=0;
 
 % for j1=0:(N-1)
@@ -53,7 +57,7 @@ for j=0:(N-1)
 end
 %
 set(gcf,'double','on')
-% set(gcf,'position',[10,10,510,510])
+% set(gcf,'position',[10,10,500,500])
 % contour(xgrid,ygrid,vorticity,values)
 hold on
 plot(Z(:,1),Z(:,2),'ko')

@@ -1,8 +1,8 @@
 %initialize.m
 L=1.0
-L0=L/2
-Lp=L/8
-theta0=pi/4
+L0=L/4
+Lp=L0/4
+theta0=pi*1/4
 
 N=64
 h=L/N
@@ -14,11 +14,11 @@ Nb = ceil(L0/(dtheta))
 
 kp=[(2:Nb),1]
 km=[Nb,(1:(Nb-1))]
-K=100
+K=400
 rho=1
 mu=0.01
-tmax=10
-dt=0.01
+tmax=40
+dt=0.005
 clockmax=ceil(tmax/dt)
 
 m0=4
@@ -54,7 +54,7 @@ for j=0:(N-1)
 end
 %
 set(gcf,'double','on')
-% set(gcf,'position',[10,10,510,510])
+% set(gcf,'position',[100,100,500,500])
 % contour(xgrid,ygrid,vorticity,values)
 hold on
 plot(Z(:,1),Z(:,2),'ko')
@@ -64,8 +64,8 @@ quiver(xgrid(1:sv:end,1:sv:end),ygrid(1:sv:end,1:sv:end),...
     u(1:sv:end,1:sv:end,1),u(1:sv:end,1:sv:end,2))
 axis([0,L,0,L])
 % caxis(valminmax)
-axis equal
-axis manual
+% axis equal
+% axis manual
 title(sprintf('t=%.2f',0))
 % title(['t=',num2str(0)])
 drawnow

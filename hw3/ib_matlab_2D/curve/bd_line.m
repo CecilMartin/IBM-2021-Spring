@@ -1,7 +1,7 @@
 function Z=bd_line(theta0)
 global Nb dtheta L0 L
 Z=zeros(Nb,2);
-arc_length=[0:(Nb-1)]*dtheta;
+arc_length=([0:(Nb-1)]+1/2)*dtheta;
 ind_1=arc_length/(L0/4)<=pi;
 ind_2=arc_length/(L0/4)>pi;
 Z(ind_1,1)=L/2-L0/4*cos(theta0)-L0/4*cos(theta0-arc_length(ind_1)/(L0/4));

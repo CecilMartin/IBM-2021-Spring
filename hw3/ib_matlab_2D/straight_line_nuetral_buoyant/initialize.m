@@ -1,8 +1,8 @@
 %initialize.m
 L=1.0
-L0=L/2
-Lp=L/8
-theta0=pi/4
+L0=L/4
+Lp=L0/4
+theta0=pi*1/4
 
 N=64
 h=L/N
@@ -18,7 +18,7 @@ K=100
 rho=1
 mu=0.01
 tmax=10
-dt=0.01
+dt=0.005
 clockmax=ceil(tmax/dt)
 
 m0=4
